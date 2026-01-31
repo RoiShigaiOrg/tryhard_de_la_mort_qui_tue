@@ -11,3 +11,8 @@ Si rien n'est donné en argument affiche juste un saut de ligne
     >> ed
     >> gnirtS
     >> aL
+
+#Documentation
+    pointer : https://www.youtube.com/watch?v=ZNjg_7nxsz4
+    string : https://www.geeksforgeeks.org/c/strings-in-c/
+    argv/argc : https://www.geeksforgeeks.org/cpp/command-line-arguments-in-c-cpp/
