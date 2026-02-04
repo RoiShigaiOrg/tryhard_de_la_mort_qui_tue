@@ -8,11 +8,11 @@ le but sera d'ecrire la position de la reine dans le tableau et de retourner ce 
 
 LE TABLEAU POSSEDERA TOUJOURS 10 CASES !!
 
-#Protoype de fonction 
+# Protoype de fonction 
 
     int *set_position(int *chess, int rows, int cols)
 
-#Exemple:
+# Exemple:
 
     >> set_position(chessboard, 5, 2) 
     >> print("%d", chessboard[5])
@@ -20,6 +20,6 @@ LE TABLEAU POSSEDERA TOUJOURS 10 CASES !!
     >> print("%d", chessboard[2])
     >> 0
 
-#Documentation
+# Documentation
     pointer : https://www.youtube.com/watch?v=ZNjg_7nxsz4
     Array : https://www.geeksforgeeks.org/c/c-arrays/
