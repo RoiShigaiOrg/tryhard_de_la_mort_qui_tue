@@ -1,0 +1,183 @@
+
+  	Info sur les String && les Pointeurs:
+ 
+  		En C les strings sont des suites de caractère, 'char' qui font un octet pour chaque char,
+  			elles se finissent toutes par un caractères nul '\0' pour indiquer à l'ordinateur que
+  			c'est la fin de la string
+ 		
+ 			Donc:
+  				=> Une string avec 5 char => 6 octets (en compte le charactère nul '\0')
+ 
+  		Un pointeur est une variable qui contient l'addresse d'une autre variable sur ton ordi
+  			un peu comme un panneau de direction sur la route ex: Pointeur p = addresse_variable_a
+  			Les pointeurs de variables sont notés avec un '*' devant le type de la variable
+ 
+  			Exemple:
+  				char *variable => pointeur vers un charactère ou STRING 
+  				int  *variable => pointeur vers un int
+ 				void *variable => point vers un type generique (c'est un peu plus complexe on verra après dans un autre exo)
+ 
+ 				On peut faire des pointeurs qui pointent des pointeurs aussi:
+ 				char **varaible => pointeur vers une string 
+ 		
+ 		Donc avec toutes ces info on sait que une string est constitué de plusieurs caractères 'char' mais en C 
+ 			un char ne peut contenir uniquement qu'un caractère:
+ 				char a = 'A' char b = 'B' etc...
+ 		Comment faire pour lier plusieurs charactère ensemble ? En utilisant des TABLEAUX (array ou buffer en anglais)
+ 		Qu'est-ce qu'un tableau ? Un tableau est un pointeur vers une suite de case memoire !
+ 		c'est à dire :
+ 						TABLEAU[5]:  <- on déclare un tableau avec 5 cases memoire dedans
+ 						ex: char tableau[5] = tableau de charactère
+ 							int tableau[5] = tableau de int
+ 
+ 				- Ce tableau est un pointeur qui pointe vers la Première Case de ce tableau,
+ 				- Chaque case mémoire ont une addresse,
+ 				- Quand on crée un tableau, l'ordi nous assure que chacunes des addresse du tableau se suivent une après une
+ 					tableau[0] = address_100 contient la lettre 'a'
+ 					tableau[1] = address_101 contient la lettre 'b'
+ 					tableau[2] = address_102 contient la lettre 'c'
+ 					tableau[3] = address_103 contient la lettre 'd'
+ 					...
+ 
+ 				ainsi quand on itère dans une string on utilise soit un index (ex: int i = 0) pour nous référrer à la case du tableau:
+ 
+ 					ex: i = 2;
+ 						tableau[i] = 'c'
+ 
+ 				Ou bien pour gagner du temps on peut incrémenter la valeur du pointeur de 1,
+ 					car comme dit précédemment dans un tableaux, toutes les addresses qui le constitue se suivent:
+ 
+ 					ex: 
+ 						address_100 + 1 = address_101 donc tableau[1] soit la lettre 'b'
+ 						address_100 + 3 = address_103 donc tableau[3] soit la lettre 'd'
+ 
+ 		OK maintenant qu'on sait ce qu'est un pointeur, une string et un tableau, comment on lit/parcours une string automatiquement ?
+ 			On ne connnait pas systematiquement la taille de la string...
+ 
+ 		En effet, MAIS comme dit précedement chacune des strings se terminent obligatoirement par un '\0' ou charactère NUL ou bien la valeur 0,
+ 			c'est ainsi que nous pouvont savoir quand on a atteint la fin de la string
+ 
+ 		plus généralement on fait ceci:
+ 
+ 			int	i = 0; <- notre index
+ 
+ 			while (str[i])	# supposons que notre string s'appelle str
+ 				i++;		# on incrémente i
+ 			
+ 		Si on y réfléchi, que ce passe-t-il à chaque étapes ?
+ 			1) On a un index i qui est égale à 0
+ 			2) On a un "while (condition)" qui va évaluer une condition 
+ 				
+ 				Notre condition ici, c'est "str[i]" (à lire: tant que str[i] est vrai ou existe)
+ 				En informatique TOUT est VRAI (= TRUE) SAUF 0 (= FALSE) !!!
+ 
+ 			3) On incrémente i si la condition est vraie (c'est-à-dire quand str[i] existe, c-à-d quand il y'a une lettre dans la case n°i)
+ 			4) Et si "str[i] == '\0'" cela veut dire:
+ 					
+ 					str[i] == '\0' == valeur 0 == FAUX donc:
+ 						la condition de while == FAUX != VRAI donc on arrête de lire la string 
+ 
+ 		Bien maintenant on sait comment lire une string, comment elle existe dans la mémoire de l'ordinateur, 
+ 			mais comment on délare une string ? 
+ 
+ 		Alors il y'a plusieurs façons déclarer une string:
+ 
+ 			1) en utilisant un TABLEAU de Char:
+ 
+ 				char tableau[5];
+ 				
+ 				tableau[0] = 'a';
+ 				tableau[1] = 'b';
+ 				tableau[2] = 'c';
+ 				...
+ 				
+ 				OU bien:
+ 
+ 				char tableau[] = "ceci est un tableau de char"; #ici on convertie directement la string en tableau
+ 
+ 			2) en créant un pointeur vers une chaîne de charactère:
+ 
+ 				char *string = "ceci est une string";
+ 
+ 		OK super, mais est-ce qu'il y'a une différence ? 
+ 		OUI !!!!
+ 		Une différence subtil mais une différence quand même qui va t'éviter des maux de têtes quand ton 
+ 			programme va bugger (il va forcément bugger, c'est la vie en informatique faudra s'y faire...)
+ 
+ 		La première méthode est de déclarer un tableau qui sera allouée dans la stack (pile en français),
+ 			cette méthode permet de modifier le tableau
+ 
+ 		La deuxième méthode déclare la string dans la section .data du programme (section non immuable sans rentrer dans les détails)
+ 			la string est donc uniquement accessible en read-only, il est donc impossible de la modifier, on dit qu'elle est constante
+ 			Pour la modifier il faudra donc la copier dans un tableau !
+ 
+ 		Maintenant revenons sur les pointeurs, comment les définir:
+ 
+ 			Il y'a 2 façons de définir un pointeur '*' et '&'
+ 
+ 			'*' est le symbole du déréférencement, c'est à dire que l'on dit à l'ordinateur:
+ 					"Tu prends cette addresse et tu regardes la valeurs qui s'y trouve"
+ 
+ 			'&' est le symbole du référencement, c'est à dire que l'on dit à l'ordinateur:
+ 					"Tu prends cette valeurs et tu me retournes sont addresse"
+ 
+  			Compliqué un peu nan ? Ouai mais en vrai pas tant que ça, on a vu avant comment déclarer
+  				une liste de pointeur (tableau) mais on a pas vu comment déclarer un pointeur sur une variable !
+ 
+  			par exemple prenons:
+ 
+  				int i = 5;			#je déclare un entier i avec pour valeur 5
+ 
+  				int	*p_i = &i;		#ici je déclare un pointeur p_i qui pointe vers l'addresse d'un entier 
+ 
+  			on va découper cette dernière ligne:
+ 
+ 				comme on a vu un pointeur contient une addresse vers une variable
+  					ici: 'int *p_i'
+ 
+ 				Pour extraire l'adresse de la variable i on a utilisé '&' sur i:
+ 						'&i'
+ 
+ 			donc cette ligne "int *p_i = &i" se lie littérallement:
+ 					"je déclare un pointeur p_i vers l'addresse d'un entier i"
+ 
+ 			Autres example:
+ 					"char *s = &c" = "je déclare un pointeur s vers l'addresse d'un char c"
+ 					"char **g = &s" = je déclare un pointeur g vers un l'addresse d'un pointeur s"
+ 
+ 			OK pour les premiers mais le dernier exemple est bizarre...non ?
+ 			J'ai pas forcément été assez clair, mais dans un ordinateur, chaque morceau d'information, quel qu'il soit, 
+ 				possède une addresse dans la mémoire, il faut bien avoir ça en tête (tout le temps !):
+ 
+ 									| addresse | valeur |
+ 									| 0x165	   |   12	|	<- ici l'addresse 165 contient la valeur 12
+ 									|		   |		|
+ 									| 0x166	   |   'c'  |	<- ici l'addresse 166 contient la valeur 'c'
+ 									|		   |		|
+ 									| 0x167    |  0x166 |	<- ici l'addresse 167 contient l'addresse '0x166'
+ 									| 0x168    |  0x167 |	<- ici l'addresse 167 contient l'addresse '0x166'
+ 
+  					Donc l'addresse 0x167 est un pointeur vers l'addresse 0x166 !
+  					Et donc l'addresse 0x168 est un pointeur vers l'addresse 0x167 qui est un pointeur vers 0x166!!
+  									(le fameux char **g = &s)
+ 
+  					Le 0x devant l'addresse informe que c'est de l'hexa décimale la convention pour noter l'addresse réelle d'une case mémooire
+ 
+  				Donc voici à quoi ressemble une string(ou un tableau) dans la mémoire:
+ 
+  									| addresse | valeur |
+  									| 0x100	   |   'a'  |
+  									| 0x101	   |   'b'  |
+  									| 0x102	   |   'c'  |
+  									| 0x103	   |   'd'  |
+  									| 0x104	   |   '\0' |
+  									| 0x105	   |  0x100 |
+ 
+  				le tableau (char *) est donc l'addresse 0x105 qui contient l'addresse 0x100 qui est le début de la string "abcd"
+  					donc si j'écrie tableau[1] celà équivaut à dire:
+  									0x105 prends pour valeur 0x100 + 1 soit 0x101 
+  								donc:
+  									On pointe vers l'addresse 0x101 soit le charactère 'b',
+  									on vient d'itérer de une case dans le tableau !
+ 
+ 		Voilà tu as les informations les plus importantes sur la relation entre les tableaux, les strings ainsi que les pointeurs
