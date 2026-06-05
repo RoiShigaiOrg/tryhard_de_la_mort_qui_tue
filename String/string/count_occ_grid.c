@@ -22,6 +22,25 @@
 #define RED_CLR "\e[0;31m"
 #define END_CLR "\e[0m"
 
+int     count_occ_grid(char     **grid, char    c)
+{
+        int     a = 0;
+        int     b = 0;
+        int     nb = 0;
+        while(grid[a])
+        {
+                while(grid[a][b])
+                {
+                        if(grid[a][b] == c)
+                                nb++;
+                        b++;
+                }
+                b = 0;
+                a++;
+        }
+        return(nb);
+}
+
 void	test()
 {
 	char *grid1[] = {"grid", "gris", "grizzly", "ouioui", NULL};

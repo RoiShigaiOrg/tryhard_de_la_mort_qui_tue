@@ -9,6 +9,16 @@
 #define RED_CLR "\e[0;31m"
 #define END_CLR "\e[0m"
 
+int     ft_strlen(char  *str)
+{
+        int     nb = 0;
+	if(str == NULL)
+		return(0);
+        while(str[nb])
+                nb++;
+        return(nb);
+}
+
 void	test()
 {
 	// -- TEST 01 --

@@ -15,6 +15,13 @@
 #define RED_CLR "\e[0;31m"
 #define END_CLR "\e[0m"
 
+char    *return_str_pos(char    *str, int       n)
+{
+        if(str == NULL)
+                return(0);
+        return(&str[n]);
+}
+
 void	test()
 {
 	// -- TEST 01 --

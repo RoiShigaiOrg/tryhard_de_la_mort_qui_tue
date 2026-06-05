@@ -23,6 +23,27 @@
  * 	Tu t'en doutes mais tu ne touche à rien dans cette fonction, je l'ai testé et elle fonctionne
  * 		très bien tout les test passe comme escompté
  * */
+int     count_words(char        *str)
+{
+        int     i = 0;
+        int     nb = 0;
+        if(str == NULL || str[0] == '\0')
+                return(0);
+        if((str[0] >= 'A' && str[0] <= 'Z') || (str[0] >= 'a' && str[0] <= 'z'))
+        {
+                nb++;
+                i++;
+        }
+        else
+                i++;
+
+        while(str[i])
+        {                                                                                       if(((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' && str[i] <= 'z')) && (str[i-1] == '\f' || str[i-1] == '\n' || str[i-1] == '\r' || str[i-1] == '\t' || str[i-1] == '\v' || str[i-1] == ' '))
+                        nb++;
+                i++;
+        }
+        return(nb);
+}
 void	test()
 {
 	// -- TEST 01 --
