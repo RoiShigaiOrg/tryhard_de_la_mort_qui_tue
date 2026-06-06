@@ -46,7 +46,7 @@ void	rush(int x, int y, char *c)
 	int	i;
 
 	i = 0;
-	if (x == 0 && y == 0)
+	if (x == 0 || y == 0)
 		return ;
 	print_horizontal(x, c[0], c[1]);
 	if (y <= 1)
